@@ -1,0 +1,1 @@
+{"thread":"main","level":"DEBUG","rayen":"kalb","loggerName":"com.abhishek.log4j2.App","message":"Hello from Log4j 2","endOfBatch":false,"loggerFqcn":"org.apache.logging.log4j.spi.AbstractLogger","instant":{"epochSecond":1587551525,"nanoOfSecond":159471800},"threadId":1,"threadPriority":5,"StudytonightField":"studytonightValue"}

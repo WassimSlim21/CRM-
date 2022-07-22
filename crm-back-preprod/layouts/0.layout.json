@@ -1,0 +1,383 @@
+                        {
+  "mobile": {
+    "overview": {
+      "audience_info": {
+        "x": 0,
+        "y": 0,
+        "cols": 4,
+        "rows": 5,
+        "widgets": {
+          "fan_number": {
+            "x": 1,
+            "y": 0,
+            "cols": 6,
+            "rows": 1
+          },
+          "new_fans": {
+            "x": 1,
+            "y": 0,
+            "cols": 6,
+            "rows": 1
+          },
+          "page_likes_count_progression": {
+            "x": 1,
+            "y": 1,
+            "cols": 12,
+            "rows": 4
+          }
+        }
+      },
+      "behavior_info": {
+        "x": 4,
+        "y": 0,
+        "cols": 4,
+        "rows": 5,
+        "widgets": {
+          "interactions_total": {
+            "x": 1,
+            "y": 0,
+            "cols": 6,
+            "rows": 1
+          },
+          "average_page_engagement": {
+            "x": 1,
+            "y": 0,
+            "cols": 6,
+            "rows": 1
+          },
+          "interactions_by_type": {
+            "x": 1,
+            "y": 1,
+            "cols": 12,
+            "rows": 4
+          }
+        }
+      },
+      "media_info": {
+        "x": 8,
+        "y": 0,
+        "cols": 4,
+        "rows": 5,
+        "widgets": {
+          "page_posts": {
+            "x": 1,
+            "y": 0,
+            "cols": 6,
+            "rows": 1
+          },
+          "fans_posts_count": {
+            "x": 1,
+            "y": 0,
+            "cols": 6,
+            "rows": 1
+          },
+          "kpeiz_post_count_by_type": {
+            "x": 1,
+            "y": 1,
+            "cols": 12,
+            "rows": 4
+          }
+        }
+      },
+      "kpeiz_most_engaging_media": {
+        "x": 0,
+        "y": 3,
+        "cols": 12,
+        "rows": 3
+      }
+    },
+    "audience": {
+      "fans_progression": {
+        "x": 0,
+        "y": 0,
+        "cols": 7,
+        "rows": 5
+      },
+      "page_likes_count_progression": {
+        "x": 5,
+        "y": 0,
+        "cols": 7,
+        "rows": 5
+      }
+    },
+    "behavior": {
+      "interactions_by_type": {
+        "x": 0,
+        "y": 0,
+        "cols": 7,
+        "rows": 5
+      },
+      "reactions_pie": {
+        "x": 6,
+        "y": 3,
+        "cols": 4,
+        "rows": 3
+      },
+      "reactions_progression": {
+        "x": 0,
+        "y": 3,
+        "cols": 6,
+        "rows": 3
+      },
+      "engagement_rate_variation": {
+        "x": 0,
+        "y": 6,
+        "cols": 5,
+        "rows": 3
+      },
+      "avg_posts_engagement_rate": {
+        "x": 5,
+        "y": 6,
+        "cols": 5,
+        "rows": 3
+      },
+      "interactions_progress": {
+        "x": 5,
+        "y": 0,
+        "cols": 5,
+        "rows": 3
+      }
+    },
+    "media": {
+      "page_posts_bar": {
+        "x": 0,
+        "y": 0,
+        "cols": 7,
+        "rows": 5
+      },
+      "page_posts_by_type": {
+        "x": 5,
+        "y": 0,
+        "cols": 5,
+        "rows": 5
+      },
+      "fans_posts_count_evolution": {
+        "x": 0,
+        "y": 3,
+        "cols": 7,
+        "rows": 5
+      },
+      "fan_posts_by_type": {
+        "x": 5,
+        "y": 3,
+        "cols": 9,
+        "rows": 7
+      },
+      "interactions_by_day": {
+        "x": 3,
+        "y": 6,
+        "cols": 9,
+        "rows": 5
+      },
+      "interactions_by_post_type": {
+        "x": 0,
+        "y": 6,
+        "cols": 5,
+        "rows": 5
+      },
+      "interactions_by_hour": {
+        "x": 0,
+        "y": 9,
+        "cols": 10,
+        "rows": 6
+      },
+      "posts": {
+        "x": 0,
+        "y": 12,
+        "cols": 10,
+        "rows": 5
+      }
+    }
+  },
+  "desktop": {
+    "overview": {
+      "audience_info": {
+        "x": 0,
+        "y": 0,
+        "cols": 4,
+        "rows": 3,
+        "widgets": {
+          "fan_number": {
+            "x": 1,
+            "y": 0,
+            "cols": 6,
+            "rows": 1
+          },
+          "new_fans": {
+            "x": 1,
+            "y": 0,
+            "cols": 6,
+            "rows": 1
+          },
+          "page_likes_count_progression": {
+            "x": 1,
+            "y": 1,
+            "cols": 12,
+            "rows": 4
+          }
+        }
+      },
+      "behavior_info": {
+        "x": 4,
+        "y": 0,
+        "cols": 4,
+        "rows": 3,
+        "widgets": {
+          "interactions_total": {
+            "x": 1,
+            "y": 0,
+            "cols": 6,
+            "rows": 1
+          },
+          "average_page_engagement": {
+            "x": 1,
+            "y": 0,
+            "cols": 6,
+            "rows": 1
+          },
+          "interactions_by_type": {
+            "x": 1,
+            "y": 1,
+            "cols": 12,
+            "rows": 4
+          }
+        }
+      },
+      "media_info": {
+        "x": 8,
+        "y": 0,
+        "cols": 4,
+        "rows": 3,
+        "widgets": {
+          "page_posts": {
+            "x": 1,
+            "y": 0,
+            "cols": 6,
+            "rows": 1
+          },
+          "fans_posts_count": {
+            "x": 1,
+            "y": 0,
+            "cols": 6,
+            "rows": 1
+          },
+          "kpeiz_post_count_by_type": {
+            "x": 1,
+            "y": 1,
+            "cols": 12,
+            "rows": 4
+          }
+        }
+      },
+      "kpeiz_most_engaging_media": {
+        "x": 0,
+        "y": 3,
+        "cols": 12,
+        "rows": 3
+      }
+    },
+    "audience": {
+      "fans_progression": {
+        "x": 0,
+        "y": 0,
+        "cols": 5,
+        "rows": 3
+      },
+      "page_likes_count_progression": {
+        "x": 5,
+        "y": 0,
+        "cols": 5,
+        "rows": 3
+      }
+    },
+    "behavior": {
+      "interactions_by_type": {
+        "x": 0,
+        "y": 0,
+        "cols": 5,
+        "rows": 3
+      },
+      "reactions_pie": {
+        "x": 6,
+        "y": 3,
+        "cols": 4,
+        "rows": 3
+      },
+      "reactions_progression": {
+        "x": 0,
+        "y": 3,
+        "cols": 6,
+        "rows": 3
+      },
+      "engagement_rate_variation": {
+        "x": 0,
+        "y": 6,
+        "cols": 5,
+        "rows": 3
+      },
+      "avg_posts_engagement_rate": {
+        "x": 5,
+        "y": 6,
+        "cols": 5,
+        "rows": 3
+      },
+      "interactions_progress": {
+        "x": 5,
+        "y": 0,
+        "cols": 5,
+        "rows": 3
+      }
+    },
+    "media": {
+      "page_posts_bar": {
+        "x": 0,
+        "y": 0,
+        "cols": 5,
+        "rows": 3
+      },
+      "page_posts_by_type": {
+        "x": 5,
+        "y": 0,
+        "cols": 5,
+        "rows": 3
+      },
+      "fans_posts_count_evolution": {
+        "x": 0,
+        "y": 3,
+        "cols": 5,
+        "rows": 3
+      },
+      "fan_posts_by_type": {
+        "x": 5,
+        "y": 3,
+        "cols": 5,
+        "rows": 3
+      },
+      "interactions_by_day": {
+        "x": 3,
+        "y": 6,
+        "cols": 7,
+        "rows": 3
+      },
+      "interactions_by_post_type": {
+        "x": 0,
+        "y": 6,
+        "cols": 3,
+        "rows": 3
+      },
+      "interactions_by_hour": {
+        "x": 0,
+        "y": 9,
+        "cols": 10,
+        "rows": 3
+      },
+      "posts": {
+        "x": 0,
+        "y": 12,
+        "cols": 10,
+        "rows": 5
+      }
+    }
+  }
+}
+      
