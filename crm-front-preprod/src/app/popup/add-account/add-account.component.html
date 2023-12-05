@@ -1,0 +1,95 @@
+<div class="main-content d-flex">
+  <div class="container-fluid my-auto">
+    <div class="row justify-content-center ">
+      <div class="col-md-">
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title">Create new CRM Account</h4>
+            <p class="card-category">Complete your informations</p>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="registerForm">
+              <div class="row">
+
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Username" formControlName="userName">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Email address" type="email" formControlName="email">
+                  </mat-form-field>
+                </div>
+              </div>
+
+
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Password" type="password" formControlName="password">
+
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Comfirm Password" type="password" formControlName="cpassword" [ngClass]="{ 'is-invalid': invalid }">
+                    <div *ngIf="this.invalid" class="invalid-feedback">
+                      <small>  Password doesn't match</small>
+                    </div>
+                  </mat-form-field>
+                </div>
+
+              </div>
+
+
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field>
+                    <mat-label>Roles</mat-label>
+                    <select matNativeControl required formControlName="role">
+                      <option value="admin">Admin</option>
+                      <option value="super-admin">Super-admin</option>
+                    </select>
+                  </mat-form-field>
+                </div>
+
+
+
+              </div>
+              <!--    <div class="row">
+                              <div class="col-md-12">
+                                <label>About Me</label>
+                                <mat-form-field class="example-full-width">
+                                   <textarea matInput placeholder="Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo."></textarea>
+                                 </mat-form-field>
+                                   <div class="form-group">
+
+                                      <div class="form-group">
+                                          <label class="bmd-label-floating"> Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</label>
+                                          <textarea class="form-control" rows="5"></textarea>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>-->
+
+        <div class="row">
+          <div class="col-md-6">
+            <button mat-raised-button type="submit" class="btn btn-primary pull-left"
+              (click)="onClickSubmit()">Create</button>
+          </div>
+          <div class="col-md-6" pull-right>
+            <a mat-raised-button (click)="close()" class="btn">Cancel</a>
+          </div>
+          <div class="clearfix"></div>
+
+        </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

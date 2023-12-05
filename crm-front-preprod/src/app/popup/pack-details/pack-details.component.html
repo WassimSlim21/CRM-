@@ -1,0 +1,208 @@
+<div class="main-content">
+  <div class="container">
+    <div class="row-md-18">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-primary">
+
+            <h4 class="card-title">
+              <i class="material-icons">all_inbox</i>
+              {{result?.pack.pack_name}}
+            </h4>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <!-- Benchmark INFORMATIONS -->
+              <div class="col-md-6">
+                <mat-list>
+                  <mat-list-item>
+                    Name : <span class="font-weight-bold">{{result?.pack?.pack_name}}</span>
+                  </mat-list-item>
+                  <mat-divider></mat-divider>
+                  <mat-list-item>
+                    Data History : <span class="font-weight-bold">{{result?.pack?.dataHistoryYears}}</span>
+                  </mat-list-item>
+                  <mat-divider></mat-divider>
+                  <mat-list-item *ngIf="result?.pack.annualSubscription >= 800">
+                    ANNUAL SUBSCRIPTION : <span class="font-weight-bold">{{result?.pack?.annualSubscription}}</span>TND
+                    month/YEAR
+                  </mat-list-item>
+                  <mat-divider></mat-divider>
+                  <mat-list-item *ngIf="result?.pack.annualSubscription <= 850 ">
+                    Annual Subscription : <span
+                      class="font-weight-bold">{{result?.pack?.annualSubscription}}</span><small>TND MOUNTH</small>
+                  </mat-list-item>
+                  <mat-divider></mat-divider>
+                  <mat-list-item>
+                    Additional Team members : <span class="font-weight-bold">{{result?.pack.users}}</span>
+                  </mat-list-item>
+                  <mat-divider></mat-divider>
+                  <mat-list-item>
+                    Mounthly Subscription : <span class="font-weight-bold">{{result?.pack?.mouthlySubcription}}</span>
+                  </mat-list-item>
+                  <mat-divider></mat-divider>
+                  <mat-list-item>
+                    Add User : <span class="font-weight-bold">{{result?.pack?.addUser}}</span><small>TND</small>
+                  </mat-list-item>
+                  <mat-divider></mat-divider>
+                  <mat-list-item *ngIf="result?.pack.maxFansNumber> 500000">
+                    Maximum fans number : <span class="font-weight-bold">NO LIMITS</span>
+                  </mat-list-item>
+
+                  <mat-divider></mat-divider>
+                  <mat-list-item *ngIf="result?.pack.maxFansNumber <= 500000">
+                    Maximum fans number :<span class="font-weight-bold">{{result?.pack?.maxFansNumber}}</span>
+                  </mat-list-item>
+                  <mat-divider></mat-divider>
+                </mat-list>
+              </div>
+              <div class="col-md-6">
+                <mat-list>
+                  <mat-list-item>
+                    Created At : <span class="font-weight-bold">{{moment(result?.pack?.created_at).fromNow()}}</span>
+                  </mat-list-item>
+                  <mat-divider></mat-divider>
+                  <mat-list-item>
+                    Last Update : <span class="font-weight-bold">{{moment(result?.pack?.updated_at).fromNow()}}</span>
+                  </mat-list-item>
+                  <mat-divider></mat-divider>
+                  <mat-list-item>
+                    Benchmark : <span class="font-weight-bold">{{result?.pack?.benchmarks.max_have}}</span>
+                  </mat-list-item>
+                  <mat-divider></mat-divider>
+                  <mat-list-item>
+                    Social accounts : <span class="font-weight-bold">{{result?.pack?.socialAccounts.max_have}}</span>
+                  </mat-list-item>
+                  <mat-divider></mat-divider>
+                  <mat-list-item>
+                    Add Pages : <span class="font-weight-bold">{{result?.pack?.addPage}}</span><small>TND</small>
+                  </mat-list-item>
+                  <mat-divider></mat-divider>
+                  <mat-list-item>
+                    Add Benchmarks: <span
+                      class="font-weight-bold">{{result?.pack?.addBenchmark}}</span><small>TND</small>
+                  </mat-list-item>
+                  <mat-divider></mat-divider>
+                </mat-list>
+              </div>
+
+            </div>
+            <div class="row pt-2 table-responsive">
+
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">
+                      Dashboard
+                    </th>
+                    <th scope="col">
+                      Audience Insight
+                    </th>
+                    <th scope="col">
+                      Trends & Engagement Reports
+                    </th>
+                    <th scope="col">
+                      Custom Benchmark
+                    </th>
+                    <th scope="col">
+                      National Reports
+                    </th>
+                    <th scope="col">
+                      Competitor content curation
+                    </th>
+                    <th scope="col">
+                      Email and supports
+                    </th>
+                    <th scope="col">
+                      Branding & Design
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <i *ngIf="result?.pack?.dashboard" color="primary" class="material-icons">done</i>
+                    </td>
+
+                    <td>
+                      <i *ngIf="result?.pack?.audienceInsights" color="primary" class="material-icons">done</i>
+                    </td>
+
+                    <td>
+                      <i *ngIf="result?.pack?.trendengagementreports" color="primary" class="material-icons">done</i>
+                    </td>
+
+                    <td>
+                      <i *ngIf="result?.pack?.customBenchmark" color="primary" class="material-icons">done</i>
+                    </td>
+
+                    <td>
+                      <i *ngIf="result?.pack?.nationalReports" color="primary" class="material-icons">done</i>
+                    </td>
+
+                    <td>
+                      <i *ngIf="result?.pack?.competitorContentCuration" color="primary" class="material-icons">done</i>
+                    </td>
+
+                    <td>
+                      <i *ngIf="result?.pack?.emailReports" color="primary" class="material-icons">done</i>
+                    </td>
+
+                    <td>
+                      <i *ngIf="result?.pack?.brandingDesign" color="primary" class="material-icons">done</i>
+                    </td>
+
+
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="row pt-2">
+              <div class="col- pl-1 pt-2">Pack Owners</div>
+              <div class="col -t" *ngIf="isLoading">
+                <mat-card style="display: flex; justify-content: center; align-items: center">
+                  <mat-progress-spinner color="accent" mode="indeterminate">
+                  </mat-progress-spinner>
+                </mat-card>
+              </div>
+              <div class="col- t" *ngFor="let user of users">
+                <div class="ct pt-1">
+                  <a (click)="openDialogUser(user._id)" target="_blank">
+                    <img *ngIf="!user.provider_userId" src="assets/img/person.png" alt="avatar">
+                    <img *ngIf="user.provider_userId" src="https://graph.facebook.com/{{user?.provider_userId}}/picture?height=50&width=50"
+                      class="rounded-circle align-center margin-auto" matTooltip="{{'name : ' + user.name}}">
+                  </a>
+                </div>
+
+
+              </div>
+            </div>
+            <!-- stat details -->
+            <div class="row">
+              <div class="col-lg-6 col-md-12 col-sm-6">
+                <div class="card card-stats">
+                  <div class="card-header card-header-info card-header-icon">
+                    <div class="card-icon">
+                      <i class="material-icons">face</i>
+                    </div>
+                    <p class="card-category">Users</p>
+                    <h3 class="card-title" *ngIf="users">
+                      {{users?.length}}
+                    </h3>
+                    <h3 class="card-title" *ngIf="users === null">
+                      0
+                    </h3>
+                  </div>
+                  <div class="card-footer">
+                    <div class="stats">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

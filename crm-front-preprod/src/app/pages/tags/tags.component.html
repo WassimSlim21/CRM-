@@ -1,0 +1,179 @@
+<div class="main-content pl-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 col-md-6 col-sm-6">
+          <div class="card card-stats">
+              <div class="card-header card-header-info card-header-icon">
+                  <div class="card-icon">
+                    <i class="material-icons">local_offer</i>
+                  </div>
+                  <p class="card-category">Tags</p>
+                  <h3 class="card-title">{{length}}</h3>
+              </div>
+              <div class="card-footer">
+                  <div class="stats">
+                      <!-- <i class="material-icons">update</i> Just Updated -->
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">Tags</h4>
+      </div>
+
+
+      <h4 class="font-weight-bold text-primary pt-2 pl-2">Filters</h4>
+      <div class="d-md-inline-flex pl-4" [formGroup]="filterForm" >
+
+        <!-- Filter Row -->
+        <div class="row">
+
+          <!-- Search -->
+          <div class="col">
+            <mat-form-field>
+              <mat-label>Search</mat-label>
+              <input matInput formControlName="name" placeholder="search tag name">
+            </mat-form-field>
+          </div>
+
+          <!-- updated At Date -->
+          <div class="col">
+            <mat-form-field>
+              <mat-label>Updated</mat-label>
+              <input matInput formControlName="updated_at" [matDatepicker]="updated_at"
+                placeholder="Updated Date">
+              <mat-datepicker-toggle matSuffix [for]="updated_at"></mat-datepicker-toggle>
+              <mat-datepicker #updated_at></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+
+          <!-- Company Type -->
+          <div class="col-sm">
+            <mat-form-field>
+              <mat-label>Tag Type</mat-label>
+              <mat-select formControlName="type" multiple>
+                <mat-option *ngFor="let type of tagTypes" [value]="type.value">
+                  {{type.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+
+
+        </div>
+      </div>
+
+
+      <mat-table #table [dataSource]="dataSource" >
+
+        <!-- Checkbox Column -->
+
+
+        <!-- name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef> name </th>
+          <td mat-cell *matCellDef="let element">
+
+            <mat-form-field>
+              <mat-label>Name</mat-label>
+              <input matInput  placeholder="tag Name" [(ngModel)]="element.name"  (change)= "updateTag(element)" >
+            </mat-form-field>
+           </td>
+        </ng-container>
+
+        <!-- synonyms Column -->
+        <ng-container matColumnDef="synonyms">
+          <th mat-header-cell *matHeaderCellDef> synonyms </th>
+          <td mat-cell *matCellDef="let element">
+            <mat-form-field class="example-chip-list">
+              <mat-chip-list #chipList aria-label="selection">
+                <mat-chip *ngFor="let synonym of element.synonyms" [selectable]="selectable"
+                         [removable]="removable" (removed)="remove(element,synonym)">
+                  {{synonym}}
+                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input  placeholder="New synonym..."
+                       [matChipInputFor]="chipList"
+                       [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                       [matChipInputAddOnBlur]="addOnBlur"
+                       (matChipInputTokenEnd)="add($event, element)">
+              </mat-chip-list>
+            </mat-form-field>
+
+          </td>
+        </ng-container>
+
+        <!-- type Column -->
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef> type </th>
+          <td mat-cell *matCellDef="let element">
+        <mat-form-field>
+
+          <mat-select [(ngModel)]="element.type" (selectionChange)= "updateTag(element)">
+            <mat-option *ngFor="let type of tagTypes" [value]="type.value"  >
+                {{type.name}}
+            </mat-option>
+
+          </mat-select>
+        </mat-form-field>
+      </td>
+      </ng-container>
+
+        <!-- updated_at Column -->
+        <ng-container matColumnDef="updated_at">
+          <th mat-header-cell *matHeaderCellDef> Updated At </th>
+          <td mat-cell *matCellDef="let element">
+            {{moment(element.updated_at).fromNow()}}
+          </td>
+        </ng-container>
+
+
+        <!-- social_accounts Column -->
+        <ng-container matColumnDef="social_accounts">
+          <th mat-header-cell *matHeaderCellDef> Related Accounts </th>
+          <td mat-cell *matCellDef="let element">   <mat-chip color="primary" (click)="openDialog(element)" selected>  <i class="fa fab fa-facebook pull-left"></i> View related ({{element.social_accounts}}) </mat-chip></td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="star" stickyEnd>
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="comfirmDialog(element)">
+                <mat-icon>delete</mat-icon>
+                <span>delete</span>
+              </button>
+            </mat-menu>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+        </tr>
+      </mat-table>
+      <mat-card *ngIf="isLoading"
+      style="display: flex; justify-content: center; align-items: center">
+     <mat-progress-spinner
+       color="accent"
+       mode="indeterminate">
+     </mat-progress-spinner>
+   </mat-card>
+      <mat-paginator [length]="length" [pageSize]="pageSize" [pageIndex]="pageIndex" [pageSizeOptions]="pageSizeOptions"
+        (page)="onPaginateChange($event)">
+      </mat-paginator>
+    </div>
+  </div>
+  <div class="fab-container">
+    <button mat-fab class="fab-toggler" (click)="addTag()">
+      <i class="material-icons">add</i>
+    </button>
+
+  </div>
+</div>

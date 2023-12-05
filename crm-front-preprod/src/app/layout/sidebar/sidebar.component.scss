@@ -1,0 +1,53 @@
+.example-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+ .example-sidenav-container {
+  flex: 1;
+}
+
+.example-sidenav{
+  color:darkgray
+}
+
+.mat-list-item{
+  color: black;
+  opacity: 0.8;
+}
+
+.mat-drawer{
+  opacity: 0.9;
+  background:White;
+}
+
+.mat-toolbar {
+  opacity: 0.9;
+  background: red;
+  color: white;
+}
+
+.example-sidenav-content {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  background-color: #e8ded7;
+  opacity: 0.9;
+}
+
+.example-toolbar {
+    z-index: 2;
+}
+
+.example-fill-remaining-space {
+
+  flex: 1 1 auto;
+}
+
+

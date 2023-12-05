@@ -1,0 +1,32 @@
+.t {
+  font-weight: bold;
+  color : gray
+}
+.image {
+  opacity: 1;
+  display: block;
+  width: 50px;
+  height: auto;
+  transition: .5s ease;
+  backface-visibility: hidden;
+}
+.ct:hover .image {
+  opacity: 0.3;
+  cursor: pointer;
+
+}
+
+.ct:hover .middle {
+  opacity: 1;
+}
+.my-tooltip {
+  white-space: pre-line;
+  max-width: 60px !important;
+}
+
+.card-header {
+  border-radius: 3px;
+  padding: 15px;
+  position: relative;
+}
+

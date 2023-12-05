@@ -1,0 +1,50 @@
+<div class="main-content">
+  <div class="container">
+    <div class="row-md-18">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-primary">
+
+            <h4 class="card-title">
+              <i class="material-icons">event</i>
+              {{data?.event?.title}}
+            </h4>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <!-- Benchmark INFORMATIONS -->
+              <div class="col-md-6">
+                <mat-list>
+                  <mat-list-item>
+                    Name : <span class="font-weight-bold">{{data?.event?.title}}</span>
+                  </mat-list-item>
+                  <mat-divider></mat-divider>
+                  <mat-list-item>
+                   Description : <span class="font-weight-bold">{{data?.event?.description}}</span>
+                  </mat-list-item>
+                  <mat-divider></mat-divider>
+                  <mat-list-item>
+                    Created by : <span class="font-weight-bold">{{data?.event?.account_id?.userName}}</span>
+                   </mat-list-item>
+                </mat-list>
+              </div>
+              <div class="col-md-6">
+                <mat-list>
+                  <mat-list-item>
+                    Start : <span class="font-weight-bold">{{moment(data?.event?.start).format('MMMM Do YYYY, h:mm:ss a')}}</span>
+                  </mat-list-item>
+                  <mat-divider></mat-divider>
+                  <mat-list-item>
+                    End : <span class="font-weight-bold">{{moment(data?.event?.end).format('MMMM Do YYYY, h:mm:ss a')}}</span>
+                  </mat-list-item>
+                  <mat-divider></mat-divider>
+                  <mat-divider></mat-divider>
+                </mat-list>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

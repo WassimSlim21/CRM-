@@ -1,0 +1,86 @@
+<div class="main-content">
+  <div class="container">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">Kpeiz Employees </h4>
+      </div>
+<div class="card-body">
+      </div>
+
+      <table mat-table [dataSource]="dataSource">
+        <!-- Position Column -->
+        <ng-container matColumnDef="user_id">
+          <th mat-header-cell *matHeaderCellDef class="pr-5">
+           User id
+          </th>
+          <td mat-cell *matCellDef="let element">
+              {{element._id}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="userName">
+          <th mat-header-cell *matHeaderCellDef class="pr-5">
+            User Name
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.userName}}
+          </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="role">
+          <th mat-header-cell *matHeaderCellDef class="pr-5">
+            Role
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.role}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef class="pr-5">
+            Email
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.email}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="star" stickyEnd>
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let element">
+            <button *ngIf="myAccount._id !== element._id" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="openDialog(element)">
+                <mat-icon>update role</mat-icon>
+                <span>update</span>
+              </button>
+              <button mat-menu-item (click)="comfirmDialog(element)">
+                <mat-icon>delete</mat-icon>
+                <span>delete</span>
+              </button>
+            </mat-menu>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-card *ngIf="isLoading"
+   style="display: flex; justify-content: center; align-items: center">
+  <mat-progress-spinner
+    color="primary"
+    mode="indeterminate">
+  </mat-progress-spinner>
+</mat-card>
+<div class="fab-container float-right">
+  <button mat-fab class="fab-toggler" class="btn btn-info float-right" (click)="addNewAccountDialog()">
+    <i class="material-icons">add</i>
+  </button>
+
+</div>
+    </div>
+  </div>
+  </div>

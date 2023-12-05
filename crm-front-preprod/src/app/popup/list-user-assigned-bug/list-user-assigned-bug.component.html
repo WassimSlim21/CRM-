@@ -1,0 +1,24 @@
+<div class="main-content">
+  <div class="container">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">{{bug.name}} Assigned too</h4>
+      </div>
+      <div class="card-body">
+
+
+<mat-list class="container p-0" *ngFor="let account of accounts">
+
+	<mat-list-item class="cursor" (click)="UpdateBugAssignedUser(this.account)" >
+		<img mat-list-avatar src="../../../assets/img/person.png" alt="avatar">
+		<p matLine>
+			<span>   {{account.userName}}   </span>
+    </p>
+	</mat-list-item>
+</mat-list>
+
+
+        </div>
+       </div>
+      </div>
+    </div>

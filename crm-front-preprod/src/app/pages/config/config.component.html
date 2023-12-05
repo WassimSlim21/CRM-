@@ -1,0 +1,38 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">Kpeiz layout configuration</h4>
+      </div>
+<div class="card-body">
+  <mat-form-field>
+  <mat-label>Select an option</mat-label>
+  <mat-select disableRipple (selectionChange)='loadFile()' [(value)]="selected">
+    <mat-option *ngFor="let file of files" value={{file}} >{{file}}</mat-option>
+
+  </mat-select>
+</mat-form-field>
+    <hr>
+    <div>
+      <div
+      ace-editor
+      [(text)]="text"
+      [mode]="'sql'"
+      [theme]="'eclipse'"
+      [options]="optionsNonJsonEditor"
+      [readOnly]="false"
+      [autoUpdateContent]="true"
+      [durationBeforeCallback]="1000"
+      (textChanged)="onChange($event)"
+      [hidden]="isAjsonFile(selected)  || selected == null"
+      style="min-height: 200px; width:100%; overflow: auto;"></div>
+    <json-editor style="height: 700px;"  #editor [options]="options" [data]="data" (change)="changeLog($event)" class="editor " [hidden]="!isAjsonFile(selected) || selected == null"></json-editor>
+  </div>
+    <div *ngIf="selected">
+ <button class="btn btn-danger" (click)='updateFile()'>Save modification</button>
+ <button class="btn btn-primary" (click)='loadFile()'>Reset</button>
+</div>
+ </div>
+ </div>
+  </div>
+</div>

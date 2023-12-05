@@ -1,0 +1,77 @@
+<div class="main-content">
+  <div class="container">
+    <div class="row-md-18">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-primary">
+
+            <h4 class="card-title">
+              <i class="material-icons">bug_report</i>
+              BUG <span class="text-uppercase">{{bug?.name}}</span>
+            </h4>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <!-- Benchmark INFORMATIONS -->
+              <div class="col-md-6">
+                <mat-list>
+                  <mat-list-item>
+                    Name : <span class="font-weight-bold">{{bug?.name}}</span>
+                  </mat-list-item>
+                  <mat-divider></mat-divider>
+                  <mat-list-item>
+                    Type : <span class="font-weight-bold">{{bug?.type}}</span>
+                  </mat-list-item>
+                  <mat-list-item>
+                    Desciption : <span class="font-weight-bold">{{bug?.description}}</span>
+                  </mat-list-item>
+                  <mat-divider></mat-divider>
+                  <mat-list-item>
+                    Created by : <span class="font-weight-bold">{{bug?.account_id?.userName}}</span>
+                  </mat-list-item>
+                  <mat-divider></mat-divider>
+                </mat-list>
+              </div>
+              <div class="col-md-6">
+                <mat-list>
+                  <mat-list-item>
+                    Etat : <span class="font-weight-bold">{{bug?.etat}}</span>
+                  </mat-list-item>
+                  <mat-divider></mat-divider>
+                  <mat-list-item *ngIf="bug?.account_assigned_id">
+                    Assigned To : <span class="font-weight-bold">{{bug?.account_assigned_id?.userName}}</span>
+                  </mat-list-item>
+                  <mat-divider *ngIf="bug?.account_assigned_id"></mat-divider>
+                  <mat-list-item *ngIf="bug?.info != ''">
+                    Info : <span class="font-weight-bold">{{bug?.info}}</span>
+                  </mat-list-item>
+                  <mat-divider *ngIf="bug?.info != ''"></mat-divider>
+                  <mat-list-item>
+                    Created At : <span class="font-weight-bold">{{moment(bug?.created_at).fromNow()}}</span>
+                  </mat-list-item>
+                  <mat-divider></mat-divider>
+                  <mat-list-item>
+                    Last Update : <span class="font-weight-bold">{{moment(bug?.updated_at).fromNow()}}</span>
+                  </mat-list-item>
+                  <mat-divider></mat-divider>
+                  </mat-list>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <button mat-raised-button type="submit" class="btn btn-primary pull-left"
+                  (click)="updateBugDialog(bug)">Update</button>
+              </div>
+              <div class="col-md-6" pull-right>
+                <a mat-raised-button class="btn" (click)="close()">Cancel</a>
+              </div>
+              <div class="clearfix"></div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

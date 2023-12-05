@@ -1,0 +1,68 @@
+<mat-dialog-content>
+  <div class="main-content">
+  <div class="container">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">Tags Details :</h4>
+      </div>
+      <div class="card-body text-center">
+      <div class="row">
+        <div class="col- t">Tag Name :</div>
+        <div class="col-sm- text-secondary pl-1 ">{{data.tag.name}}</div>
+
+       </div>
+       <div class="row">
+        <div class="col- t">Tag type :</div>
+        <div class="col- pl-1 text-secondary" *ngIf="data.tag.type === '0'">Sector</div>
+        <div class="col- pl-1 text-secondary"  *ngIf="data.tag.type === '1'">Country</div>
+        <div class="col- pl-1 text-secondary" *ngIf="data.tag.type === '2'">Provider</div>
+
+       </div>
+       <div class="row pt-2">
+        <div class="col- t">Tag Synonyms :</div>
+        <div class="col- t">
+              <mat-form-field class="example-chip-list">
+                <mat-chip-list #chipList aria-label="selection">
+                  <mat-chip *ngFor="let synonym of data.tag.synonyms" [selectable]="selectable"
+                           [removable]="removable" (removed)="remove(data.tag,synonym)">
+                    {{synonym}}
+                    <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                  </mat-chip>
+                  <input
+                  [matChipInputFor]="chipList"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                  [matChipInputAddOnBlur]="addOnBlur"
+                  (matChipInputTokenEnd)="add($event, data.tag)"
+                />
+                </mat-chip-list>
+              </mat-form-field>
+        </div>
+       </div>
+       <div class="row pt-2">
+        <div class="col- pl-1 t">Related Accounts :</div>
+        <div class="col -t" *ngIf="isLoading">
+          <mat-card
+          style="display: flex; justify-content: center; align-items: center">
+         <mat-progress-spinner
+           color="accent"
+           mode="indeterminate">
+         </mat-progress-spinner>
+       </mat-card>
+        </div>
+        <div class="col- t" *ngFor="let sc of socialAccount">
+          <div class="ct pt-1">
+            <a (click)="openDialog(sc._id)"   target="_blank">
+          <img  src="https://graph.facebook.com/{{sc?.remote_id}}/picture?type=square" class="rounded-circle image ml-2"
+           matTooltip="{{'Title : ' + sc.title}}"
+         >
+        </a>
+        </div>
+
+
+        </div>
+       </div>
+      </div>
+    </div>
+  </div>
+</div>
+</mat-dialog-content>

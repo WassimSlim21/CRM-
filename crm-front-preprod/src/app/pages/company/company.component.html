@@ -1,0 +1,100 @@
+
+<div class="main-content">
+
+  <div class="container">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">Kpeiz Companies </h4>
+      </div>
+<div class="card-body">
+      <h4 class="font-weight-bold text-primary pt-2 pl-2">Filters</h4>
+      <div class="d-md-inline-flex pl-4" [formGroup]="filterForm">
+        <div class="row">
+
+          <!-- Company Name -->
+          <div class="col-sm">
+            <mat-form-field>
+              <mat-label>Company Name</mat-label>
+              <input matInput formControlName="name" placeholder="Search Company by name">
+            </mat-form-field>
+          </div>
+
+
+          <!-- Company Type -->
+          <div class="col-sm">
+            <mat-form-field>
+              <mat-label>Company Type</mat-label>
+              <mat-select formControlName="type" multiple>
+                <mat-option *ngFor="let type of companyType" [value]="type.name">
+                  {{type.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <table mat-table [dataSource]="dataSource">
+        <!-- Position Column -->
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef class="pr-5">
+           Company Name
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <a  (click)="openDialog(element._id, element.name)" class=" cursor-pointer text-primary font-weight-bold ">
+              {{element.name}}</a>
+          </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="company_type">
+          <th mat-header-cell *matHeaderCellDef class="pr-5">
+            Company Type
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.type}}
+          </td>
+        </ng-container>
+
+
+
+        <ng-container matColumnDef="website">
+          <th mat-header-cell *matHeaderCellDef class="pr-5">
+            Web Site
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.website}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="users">
+          <th mat-header-cell *matHeaderCellDef class="pr-5">
+            Users
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.users}}
+          </td>
+        </ng-container>
+
+
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-card *ngIf="isLoading"
+   style="display: flex; justify-content: center; align-items: center">
+  <mat-progress-spinner
+    color="primary"
+    mode="indeterminate">
+  </mat-progress-spinner>
+</mat-card>
+      <mat-paginator [length]="length" [pageSize]="pageSize" [pageIndex]="pageIndex" [pageSizeOptions]="pageSizeOptions"
+        (page)="onPaginateChange($event)">
+      </mat-paginator>
+    </div>
+  </div>
+  </div>
+

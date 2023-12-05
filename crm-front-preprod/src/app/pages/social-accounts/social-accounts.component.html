@@ -1,0 +1,159 @@
+<div class="main-content">
+  <div class="container">
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">Social Accounts </h4>
+      </div>
+<div class="card-body">
+      <h4 class="font-weight-bold text-primary pt-2 pl-2">Filters</h4>
+      </div>
+      <div class="d-md-inline-flex pl-4" [formGroup]="filterForm" >
+
+        <!-- Filter Row -->
+        <div class="row">
+
+          <!-- Search -->
+          <div class="col-md-12">
+            <mat-form-field>
+              <mat-label>Search</mat-label>
+              <input matInput formControlName="name" placeholder="search tag name">
+            </mat-form-field>
+          </div>
+
+          <div class="col-md-12">
+            <mat-form-field class="example-chip-list">
+              <mat-chip-list #chipList aria-label="tag selection">
+                <mat-chip
+                  *ngFor="let tag of tags"
+                  [selectable]="selectable"
+                  [removable]="removable"
+                  (removed)="remove(tag)">
+                  {{tag}}
+                  <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input
+                  placeholder="add tag..."
+                  #tagInput
+                  formControlName="tagCtrl"
+                  [matAutocomplete]="auto"
+                  [matChipInputFor]="chipList"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                  (matChipInputTokenEnd)="add($event)">
+              </mat-chip-list>
+              <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                <mat-option *ngFor="let tag of filteredTags | async" [value]="tag">
+                  {{tag}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </div>
+
+
+
+        </div>
+      </div>
+
+
+      <table mat-table [dataSource]="dataSource">
+        <!-- Position Column -->
+
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef class="pr-5">
+            title
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <a  (click)="openDialog(element._id)"  class=" cursor-pointer text-primary font-weight-bold ">
+              {{element.title}}</a>
+          </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="remote_id">
+          <th mat-header-cell *matHeaderCellDef class="pr-5">
+            remote_id
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.remote_id}}
+          </td>
+        </ng-container>
+
+
+
+        <ng-container matColumnDef="cover">
+          <th mat-header-cell *matHeaderCellDef class="pr-5">
+            cover
+          </th>
+          <td mat-cell *matCellDef="let element">
+        <a  (click)="openDialog(element._id)">
+            <img src="https://graph.facebook.com/{{element.remote_id}}/picture?type=square" class="avatar" alt="Avatar">
+          </a>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="provider">
+          <th mat-header-cell *matHeaderCellDef class="pr-5">
+            provider
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.provider}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="flagged_at">
+          <th mat-header-cell *matHeaderCellDef class="pr-5">
+            flagged_at
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.flagged_at || 'not flagged'}}
+          </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="flagged_cause">
+          <th mat-header-cell *matHeaderCellDef class="pr-5">
+            flagged_cause
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.flagged_cause || 'not flagged'}}
+          </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="created_at">
+          <th mat-header-cell *matHeaderCellDef class="pr-5">
+            created_at
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.created_at?moment(element.created_at).fromNow():'no date'  }}
+          </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="updated_at">
+          <th mat-header-cell *matHeaderCellDef class="pr-5">
+            updated_at
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{element.updated_at?moment(element.updated_at).fromNow():'no date' }}
+          </td>
+        </ng-container>
+
+
+
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-card *ngIf="isLoading"
+   style="display: flex; justify-content: center; align-items: center">
+  <mat-progress-spinner
+    color="primary"
+    mode="indeterminate">
+  </mat-progress-spinner>
+</mat-card>
+      <mat-paginator [length]="length" [pageSize]="pageSize" [pageIndex]="pageIndex" [pageSizeOptions]="pageSizeOptions"
+        (page)="onPaginateChange($event)">
+      </mat-paginator>
+    </div>
+  </div>
+  </div>

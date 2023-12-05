@@ -1,0 +1,52 @@
+
+<mat-dialog-content>
+  <mat-card tdMediaToggle="gt-xs" Class="['push-sm']">
+  <mat-card-header class="bg-info">
+    <mat-card-title class="text-light"> {{file?.name }} Comments</mat-card-title>
+</mat-card-header>
+  <mat-list>
+    <ng-template let-item let-i="index" let-last="last" ngFor let-comment [ngForOf]="comments">
+      <mat-list-item>
+        <img mat-list-avatar src="../../../assets/img/person.png" />
+        <h3 mat-line class="font-weight-bold text-secondary"> {{comment?.account_id?.userName}} </h3>
+        <h4 mat-line>{{comment?.account_id?.role}}</h4>
+
+        <h6 mat-column class="text-warning">{{moment(comment?.created_at).fromNow()}}</h6>
+        <div mat-column>
+          <button type="button" *ngIf="comment?.deletable" class="close" aria-label="Close" (click)="comfirmDialog(comment?._id)">
+            <span class="colorchanged" aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <p mat-line>
+          <span class="text-wrap">
+          <b class="text-secondary">content :</b>   {{comment?.content}}
+          </span>
+        </p>
+      </mat-list-item>
+      <mat-divider *ngIf="!last" mat-inset></mat-divider>
+    </ng-template>
+  </mat-list>
+  <mat-form-field class="example-full-width">
+    <mat-label>Leave a comment</mat-label>
+    <textarea name="text" matInput [(ngModel)]="myText" placeholder="Leave a comment">
+
+    </textarea>
+
+
+</mat-form-field>
+<!--
+  Error a revoir
+<emoji-input name="text" [(ngModel)]="myText"
+[closeAfterSelection]="false"
+style="display: inline-block;"
+(click)="openPopup(false)"
+
+(setPopupAction)="setPopupAction($event)">
+</emoji-input> -->
+<div class="add">
+  <a (click)="addComment()" class="btn btn-info">
+    Comment  <i class="fa fa-send-o"></i>
+  </a>
+</div>
+</mat-card>
+</mat-dialog-content>

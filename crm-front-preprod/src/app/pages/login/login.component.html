@@ -1,0 +1,58 @@
+<section id="background">
+</section>
+
+ <div class="main-content d-flex min-vh-100">
+  <div class="container-fluid my-auto">
+    <div class="center">
+      <div class="swing">
+      <img src="../../../assets/img/logo.png" class="img-log" width="150" height="150"/>
+    </div>
+    </div>
+    <div class="row justify-content-center ">
+      <div class="col-md-4">
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title">CRM Kpeiz</h4>
+            <p class="card-category">Complete your informations</p>
+          </div>
+          <div class="card-body">
+            <form role="form" (ngSubmit)="login()">
+              <div class="row">
+
+                <div class="col">
+                  <mat-form-field class="example-full-width">
+                    <input matInput [(ngModel)]="userName" name="userName"  placeholder="username">
+                  </mat-form-field>
+                </div>
+
+              </div>
+
+              <div class="row">
+                <div class="col">
+                  <mat-form-field class="example-full-width">
+                    <input matInput [(ngModel)]="password" name="password"  placeholder="Password" type="password">
+                  </mat-form-field>
+                </div>
+              </div>
+
+
+
+
+              <div class="row">
+                <div class="col-md-6">
+                  <button mat-raised-button type="submit" class="btn btn-primary pull-left"
+                  (click)="login()">Login</button>
+                </div>
+              <div class="clearfix"></div>
+
+</div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+ </div>
+
+

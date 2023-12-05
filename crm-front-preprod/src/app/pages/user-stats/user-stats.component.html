@@ -1,0 +1,121 @@
+<div class="main-content">
+  <div class="container">
+    <div class="row">
+      <!-- User Per Pack  -->
+        <div class="col-md-6">
+          <div class="card card-chart">
+                <div class="card-header card-header-success">
+                    <div class="ct-chart">User Per Pack</div>
+                </div>
+                <div class="card-body">
+                  <div class="cen d-flex justify-content-center">
+                    <div *ngIf="isLoadingStats" class ="loader"></div>
+                  </div>
+                      <div class="chart">
+                        <canvas baseChart
+                          [data]="pieChartData"
+                          [labels]="pieChartLabels"
+                          [chartType]="pieChartType"
+                          [options]="pieChartOptions"
+                          [plugins]="pieChartPlugins"
+                          [colors]="pieChartColors"
+                          [legend]="pieChartLegend"
+                          (chartClick)="chartClicked($event)"
+                          (mouseover)="chartHovered($event)"
+                          >
+                        </canvas>
+                  </div>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- UserActivity Per Day Stats -->
+        <div class="col-md-6">
+            <div class="card card-chart">
+                <div class="card-header card-header-warning">
+                    <div class="ct-chart" id="websiteViewsChart">Users Activity Per Day</div>
+                </div>
+                <div class="card-body">
+                  <div>
+                    <div>
+                      <div style="display: block">
+                        <canvas baseChart
+                          [datasets]="barChartData"
+                          [labels]="barChartLabels"
+                          [options]="barChartOptions"
+                          [plugins]="barChartPlugins"
+                          [legend]="barChartLegend"
+                          [chartType]="barChartType"
+                          [colors]="barChartColors"
+                          (chartClick)="barChartClicked($event)"
+                          (chartHover)="barChartHovered($event)"
+                          >
+                        </canvas>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card-footer">
+                    <div class="stats">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4 col-md-6 col-sm-6">
+          <div class="card card-stats">
+              <div class="card-header card-header-warning card-header-icon">
+                  <div class="card-icon">
+                      <i class="material-icons">face</i>
+                  </div>
+                  <p class="card-category">Kpeiz Users</p>
+                  <h3 class="card-title">{{length}}
+                      <small>Users</small>
+                  </h3>
+              </div>
+              <div class="card-footer">
+                  <div class="stats">
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-6">
+          <div class="card card-stats">
+              <div class="card-header card-header-info card-header-icon">
+                  <div class="card-icon">
+                      <i class="material-icons">apartment</i>
+                  </div>
+                  <p class="card-category">Companys</p>
+                  <h3 class="card-title">{{companyNumber}} Companys</h3>
+              </div>
+              <div class="card-footer">
+                  <div class="stats">
+                      <!-- <i class="material-icons">date_range</i> Last 24 Hours -->
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="col-lg-4 col-md-6 col-sm-6">
+          <div class="card card-stats">
+              <div class="card-header card-header-danger card-header-icon">
+                  <div class="card-icon">
+                      <i class="material-icons">inbox</i>
+                  </div>
+                  <p class="card-category">Packs Total Users</p>
+                  <h3 class="card-title">{{packsTot}} Pack Users</h3>
+              </div>
+              <div class="card-footer">
+                  <div class="stats">
+                      <!-- <i class="material-icons">local_offer</i> Tracked from Github -->
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
+

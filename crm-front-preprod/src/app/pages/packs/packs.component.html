@@ -1,0 +1,121 @@
+  <div class="main-content">
+    <div class="container">
+      <div class="card">
+        <div class="card-header card-header-primary">
+          <h4 class="card-title">Kpeiz Packs</h4>
+        </div>
+  <div class="card-body">
+        <mat-table #table [dataSource]="dataSource">
+          <!-- Position Column -->
+          <ng-container matColumnDef="Packname">
+            <th mat-header-cell *matHeaderCellDef class="pr-5">
+              Pack Name
+            </th>
+            <td mat-cell *matCellDef="let element">
+               <a (click)="openDialog(element._id)" class="font-weight-bold text-primary cursor-pointer"> {{element.pack_name}} </a>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="AnnualSubscriiption">
+            <th mat-header-cell *matHeaderCellDef class="pr-5">
+              Annual Subscriiption
+            </th>
+            <td mat-cell *matCellDef="let element" class="font-weight-bold">
+              {{element.annualSubscription}}
+              <span *ngIf="element.annualSubscription < 825"><small>TND Mounth</small></span>
+              <span *ngIf="element.annualSubscription >= 825"><small>TND mounth/YEAR</small></span>
+
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="DataHistory">
+            <th mat-header-cell *matHeaderCellDef class="pr-5">
+              Data History
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{element?.dataHistoryYears}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="SocialAccounts">
+            <th mat-header-cell *matHeaderCellDef class="pr-5">
+              Social accounts
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{element?.socialAccounts?.max_have}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Benchmarks">
+            <th mat-header-cell *matHeaderCellDef class="pr-5">
+              Benchmarks
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{element?.benchmarks?.max_have}}
+            </td>
+          </ng-container>
+
+
+
+          <ng-container matColumnDef="CreatedAt">
+            <th mat-header-cell *matHeaderCellDef class="pr-5">
+              Created At
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{moment(element?.created_at).fromNow()}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="UpdatedAt">
+            <th mat-header-cell *matHeaderCellDef class="pr-5">
+              Updated At
+            </th>
+            <td mat-cell *matCellDef="let element">
+              {{moment(element?.updated_at).fromNow()}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="star" stickyEnd>
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+              <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="comfirmDialog(element._id)">
+                  <mat-icon>delete</mat-icon>
+                  <span>delete</span>
+                </button>
+                <button mat-menu-item (click)="openDialogUpdate(element._id)">
+                  <mat-icon>update</mat-icon>
+                  <span>update</span>
+                </button>
+              </mat-menu>
+            </td>
+          </ng-container>
+
+
+
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </mat-table>
+        <mat-card *ngIf="isLoading"
+     style="display: flex; justify-content: center; align-items: center">
+    <mat-progress-spinner
+      color="primary"
+      mode="indeterminate">
+    </mat-progress-spinner>
+  </mat-card>
+      </div>
+    </div>
+    </div>
+
+    <div class="fab-container float-right">
+      <button mat-fab class="fab-toggler" class="btn btn-info" (click)="openNewPack()">
+        <i class="material-icons">add</i>
+      </button>
+
+    </div>
+    </div>
+

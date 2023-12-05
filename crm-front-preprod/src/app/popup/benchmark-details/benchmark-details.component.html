@@ -1,0 +1,201 @@
+<div class="main-content">
+  <div class="container">
+      <div class="row-md-18">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-primary">
+                      <h4 class="card-title"><i *ngIf="benchmark?.provider === 'instagram'" class="fa fa-instagram"></i> <i *ngIf="benchmark?.provider === 'facebook'" class="fa fa-facebook"></i>  {{benchmark?.name}}</h4>
+                  </div>
+                  <div class="card-body">
+                      <div class="row">
+                            <!-- Benchmark INFORMATIONS -->
+                        <div class="col-md-6">
+                          <mat-list>
+                            <mat-list-item>
+                              Name : {{benchmark?.name}}
+                            </mat-list-item>
+                            <mat-divider></mat-divider>
+                            <mat-list-item>
+                              Created At : {{moment(benchmark?.created_at).fromNow()}}
+
+                            </mat-list-item>
+                            <mat-divider></mat-divider>
+                            <mat-list-item *ngIf="benchmark?.country">
+                              Country : {{benchmark?.country}}
+                            </mat-list-item>
+                            <mat-divider *ngIf="benchmark?.country"></mat-divider>
+                          </mat-list>
+                        </div>
+                        <div class="col-md-6">
+                          <mat-list>
+                            <mat-list-item>
+                              Provider : {{benchmark?.provider}}
+                            </mat-list-item>
+                            <mat-divider></mat-divider>
+                            <mat-list-item>
+                              Last Update : {{moment(benchmark?.updated_at).fromNow()}}
+                            </mat-list-item>
+                            <mat-divider></mat-divider>
+                            <mat-list-item>
+                              Type : {{benchmark?.type}}
+                            </mat-list-item>
+                            <mat-divider></mat-divider>
+                          </mat-list>
+                        </div>
+
+                    </div>
+                    <div class="row pt-2">
+                      <div class="col-md-12">
+                        <mat-accordion>
+
+                          <!-- Social Accounts -->
+                          <mat-expansion-panel >
+                            <mat-expansion-panel-header>
+                              <mat-panel-title>
+                                Sociak Accounts
+                              </mat-panel-title>
+
+                            </mat-expansion-panel-header>
+
+                                <mat-list *ngFor="let account of socialAccounts">
+
+                                   <mat-list-item>
+                                    <div mat-line>
+                                      <a (click)="openDialogSocialAccount(account._id)">
+                                       <i *ngIf="account?.provider === 'instagram'" class="fa fa-instagram"></i> <i *ngIf="account?.provider === 'facebook'" class="fa fa-facebook"></i>
+                                       <img src="https://graph.facebook.com/{{account?.remote_id}}/picture?type=square"   class="rounded-circle align-center margin-auto" height="50" width="50"></a></div>
+                                    <div mat-column> <a (click)="openDialogSocialAccount(account._id)"><p class="text-bold text-primary cursor">{{account.title}}</p></a></div>
+                                  </mat-list-item>
+                                  <mat-divider></mat-divider>
+                                </mat-list>
+
+                          </mat-expansion-panel>
+
+                          <!-- Tags -->
+                          <mat-expansion-panel >
+                            <mat-expansion-panel-header>
+                              <mat-panel-title>
+                              Tags
+                              </mat-panel-title>
+
+                            </mat-expansion-panel-header>
+                            <mat-tab-group color="accent">
+                              <div >
+                              <mat-tab label="{{account.title}}"  *ngFor="let account of socialAccounts">
+                                <mat-list *ngFor="let tag of account?.tags">
+                                  <mat-list-item>
+                                    <div mat-line>
+
+                                      <a (click)="openTagDetails(tag)">
+                                     {{tag.name}}</a></div>
+                                    <div mat-line>  {{moment(tag.updated_at).fromNow()}} </div>
+                                    <div mat-column>
+                                      <div class="col- pl-1 text-secondary" *ngIf="tag.type === '0'">Sector</div>
+                                      <div class="col- pl-1 text-secondary"  *ngIf="tag.type === '1'">Country</div>
+                                      <div class="col- pl-1 text-secondary" *ngIf="tag.type === '2'">Provider</div>
+
+                                    </div>
+                                  </mat-list-item>
+                                  <mat-divider></mat-divider>
+                                </mat-list>
+                              </mat-tab>
+                            </div>
+                            </mat-tab-group>
+
+                          </mat-expansion-panel>
+
+                          <!-- Owners -->
+
+                          <mat-expansion-panel >
+                            <mat-expansion-panel-header>
+                              <mat-panel-title>
+                                Owner
+                              </mat-panel-title>
+
+                            </mat-expansion-panel-header>
+
+
+                                  <mat-list-item >
+
+                                    <div mat-line><a (click)="openDialogUser(benchmark?.owner?._id)"><img src="https://graph.facebook.com/{{benchmark?.owner?.provider_userId}}/picture"   class="rounded-circle"></a></div>
+                                    <div mat-column> <a (click)="openDialogUser(benchmark?.owner?._id)"><p class="text-bold text-primary">{{benchmark?.owner?.name}}</p></a></div>
+
+                                  </mat-list-item>
+                                  <mat-divider></mat-divider>
+
+                          </mat-expansion-panel>
+
+                          </mat-accordion>
+
+
+                      </div>
+
+                    </div>
+                    <!-- stat details -->
+                    <div class="row">
+                      <div class="col-lg-6 col-md-12 col-sm-6">
+                          <div class="card card-stats">
+                              <div class="card-header card-header-warning card-header-icon">
+                                  <div class="card-icon">
+                                      <i class="material-icons">face</i>
+                                  </div>
+                                  <p class="card-category">Users</p>
+                                  <h3 class="card-title" *ngIf="users">
+                                    {{users?.length}}
+                                  </h3>
+                                  <h3 class="card-title" *ngIf="users === null">
+                                    0
+                                  </h3>
+                              </div>
+                              <div class="card-footer">
+                                  <div class="stats">
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-lg-6 col-md126 col-sm-6">
+                          <div class="card card-stats">
+                              <div class="card-header card-header-info card-header-icon">
+                                  <div class="card-icon">
+                                      <i class="material-icons">people</i>
+                                  </div>
+                                  <p class="card-category">Social Accounts</p>
+                                  <h3 class="card-title">
+                                      {{socialAccounts?.length}}
+                                  </h3>
+                              </div>
+                              <div class="card-footer">
+                                  <div class="stats">
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="card card-stats">
+                            <div class="card-header card-header-info card-header-icon">
+                                <div class="card-icon">
+                                  <i class="material-icons">local_offer</i>
+                                </div>
+                                <p class="card-category">Tags</p>
+                                <h3 class="card-title">{{tagsTotal}}</h3>
+                            </div>
+                            <div class="card-footer">
+                                <div class="stats">
+                                    <!-- <i class="material-icons">update</i> Just Updated -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                  </div>
+
+              </div>
+
+          </div>
+      </div>
+  </div>
+</div>
+
+

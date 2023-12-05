@@ -1,0 +1,68 @@
+<div class="main-content d-flex ">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-">
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title">Update Bug</h4>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="updateBugForm">
+              <!-- Name and descriptions -->
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Bug Name" formControlName="name">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Description" formControlName="description">
+                  </mat-form-field>
+                </div>
+              </div>
+              <!-- Type and AccountAssigned -->
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field>
+                    <mat-label>Assigned to</mat-label>
+                    <mat-select formControlName="account_assigned_id"  >
+                      <mat-option *ngFor="let account of accounts" [value]="account?._id">
+                        {{account.userName}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Type of Bug" formControlName="type">
+                  </mat-form-field>
+                </div>
+              </div>
+              <!-- Info -->
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="More Info" formControlName="info">
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <button mat-raised-button type="submit" class="btn btn-primary pull-left" (click)="updateBug()"
+                   >Update</button>
+                </div>
+                <div class="col-md-6" pull-right>
+                  <a mat-raised-button class="btn" (click)="close()">Cancel</a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

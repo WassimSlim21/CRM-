@@ -1,0 +1,45 @@
+<mat-dialog-content>
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">{{data.users.day}} list of Users</h4>
+      </div>
+      <div class="card-body">
+
+
+<mat-list class="container p-0" >
+  <div mat-subheader *ngIf="data?.users?.created_at.length > 0">New created users</div>
+	<mat-list-item *ngFor="let user of data?.users?.created_at">
+    <img matListAvatar *ngIf="user.provider_userId" src="https://graph.facebook.com/{{user.provider_userId}}/picture?type=square"  alt="avatar">
+    <img matListAvatar *ngIf="!user.provider_userId" src="assets/img/person.png" alt="avatar">
+    <h3 matLine> <a (click)="openDialog(user._id)" class=" cursor-pointer text-primary font-weight-bold ">{{user.name}}</a>
+    </h3>
+		<p matLine>
+			<span>   {{user?.pack?.pack_name }}   </span>
+    </p>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <div mat-subheader *ngIf="data?.users?.last_login.length > 0">New login users</div>
+  <mat-list-item *ngFor="let user of data.users.last_login">
+    <img matListAvatar *ngIf="user.provider_userId" src="https://graph.facebook.com/{{user.provider_userId}}/picture?type=square"  alt="avatar">
+    <img matListAvatar *ngIf="!user.provider_userId" src="assets/img/person.png" alt="avatar">
+    		<h3 matLine> <a (click)="openDialog(user._id)" class=" cursor-pointer text-primary font-weight-bold ">{{user.name}}</a> </h3>
+		<p matLine>
+			<span>   {{user?.pack?.pack_name }}   </span>
+    </p>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <div mat-subheader *ngIf="data?.users?.updated_at.length > 0">New updated users</div>
+  <mat-list-item *ngFor="let user of data.users.updated_at">
+
+    <img matListAvatar *ngIf="user.provider_userId" src="https://graph.facebook.com/{{user.provider_userId}}/picture?type=square"  alt="avatar">
+    <img matListAvatar *ngIf="!user.provider_userId" src="assets/img/person.png" alt="avatar">
+    		<h3 matLine> <a (click)="openDialog(user._id)" class=" cursor-pointer text-primary font-weight-bold ">{{user.name}}</a> </h3>
+		<p matLine>
+			<span>   {{user?.pack?.pack_name }}   </span>
+    </p>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+</mat-list>
+        </div>
+       </div>
+</mat-dialog-content>

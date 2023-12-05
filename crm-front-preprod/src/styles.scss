@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+html, body { height: 100%;
+  scroll-behavior: smooth; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.mat-tab-body-content {
+
+  overflow: hidden !important;
+}
+/*
+
+html, body {
+  min-height: 100%;
+}*/
+
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+/* Add application styles & imports to this file! */
+@import '~jsoneditor/dist/jsoneditor.min.css';
+
+// You can't upload images to stackblitz
+div.jsoneditor-menu > button {
+  background-image: url('https://cdnjs.cloudflare.com/ajax/libs/jsoneditor/9.0.1/img/jsoneditor-icons.svg');
+}
+
+#angjsoneditor5396{
+  height: 700px;
+}

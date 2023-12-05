@@ -1,0 +1,241 @@
+<app-user-stats></app-user-stats>
+<div class="main-content">
+  <div class="container-fluid">
+   <!-- Statistique Users -->
+  <!-- Ng 2 chart pie chart User per pack -->
+   <!-- /Statistique Users -->
+   <!-- User Tables Users -->
+    <div class="card">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">Kpeiz Users </h4>
+      </div>
+      <!-- Card body -->
+<div class="card-body">
+      <h4 class="font-weight-bold text-primary pt-2 pl-2">Filters</h4>
+      <div class="d-md-inline-flex pl-4" [formGroup]="filterForm">
+        <!-- Filter Row -->
+        <div class="row">
+          <!-- Search -->
+          <div class="col">
+            <mat-form-field>
+              <mat-label>Search</mat-label>
+              <input matInput formControlName="name" placeholder="search user name">
+            </mat-form-field>
+          </div>
+
+          <!-- Company Name -->
+          <div class="col">
+            <mat-form-field>
+              <mat-label>Company Name</mat-label>
+              <input matInput formControlName="company" placeholder="Company name">
+            </mat-form-field>
+          </div>
+
+          <!-- Login Date -->
+          <div class="col">
+            <mat-form-field>
+              <mat-label>Choose a user login date</mat-label>
+              <input matInput formControlName="last_login" [matDatepicker]="loginDate">
+              <mat-datepicker-toggle matSuffix [for]="loginDate" placeholder="Login Date"></mat-datepicker-toggle>
+              <mat-datepicker #loginDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <!-- Created At Date -->
+          <div class="col">
+            <mat-form-field>
+              <mat-label>Choose a user created at date</mat-label>
+              <input matInput formControlName="created_at" [matDatepicker]="createdAtDate"
+                placeholder="Created At Date">
+              <mat-datepicker-toggle matSuffix [for]="createdAtDate"></mat-datepicker-toggle>
+              <mat-datepicker #createdAtDate></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+
+          <!-- Company Type -->
+
+          <div class="col">
+            <mat-form-field>
+              <mat-label>Company Type</mat-label>
+              <mat-select formControlName="company_type" >
+                <mat-option *ngFor="let type of companyType" [value]="type.name">
+                  {{type.name}}
+                </mat-option>
+                <mat-option value="">
+                  All
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+          <!-- Score -->
+          <div class="col">
+            <mat-form-field>
+              <mat-label>Score </mat-label>
+              <input matInput placeholder="Score" formControlName="score" maxlength="10">
+            </mat-form-field>
+          </div>
+
+          <!-- Packs -->
+          <div class="col">
+            <mat-form-field>
+              <mat-label>Packs</mat-label>
+              <mat-select formControlName="pack" multiple>
+                <mat-option *ngFor="let pack of packs" [value]="pack._id">
+                  {{pack.pack_name}}
+                </mat-option>
+              </mat-select>
+
+            </mat-form-field>
+          </div>
+
+          <!-- Status -->
+          <div class="col">
+            <mat-form-field>
+              <mat-label>Status</mat-label>
+              <mat-select formControlName="status" multiple>
+                <mat-option *ngFor="let s of status" [value]="s.value">
+                  {{s.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+
+
+
+        </div>
+      </div>
+      <mat-table #table [dataSource]="dataSource">
+        <!-- Position Column -->
+        <ng-container matColumnDef="picture">
+          <th mat-header-cell *matHeaderCellDef> Picture </th>
+          <td mat-cell *matCellDef="let element">
+
+            <img *ngIf="element.provider_userId" src="https://graph.facebook.com/{{element.provider_userId}}/picture?type=square" class="avatar"
+              alt="Avatar">
+              <img *ngIf="!element.provider_userId" src="assets/img/person.png" class="avatar"
+              alt="Avatar">
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef class="pr-5">
+            Name
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <a (click)="openDialog(element._id)" class=" cursor-pointer text-primary font-weight-bold ">
+              {{element.name}}</a>
+          </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="company">
+          <th mat-header-cell *matHeaderCellDef class="pr-5">
+            company
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{element?.data?.company}}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="score">
+          <th mat-header-cell *matHeaderCellDef class="pr-5">
+            score
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{element?.score}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef class="pr-5">
+            email
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{element?.email}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="phone">
+          <th mat-header-cell *matHeaderCellDef class="pr-5">
+            phone
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{element?.data?.phone}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="pack">
+          <th mat-header-cell *matHeaderCellDef class="pr-5">
+            Packs
+          </th>
+          <td mat-cell *matCellDef="let element">
+            {{element?.pack?.pack_name}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="created_at">
+          <th mat-header-cell *matHeaderCellDef class="pr-5">
+            created_at
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <!-- {{moment(element.created_at).format('MMMM Do YYYY, h:mm:ss a')}} -->
+                  {{moment(element.created_at).fromNow()}}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="last_login">
+          <th mat-header-cell *matHeaderCellDef class="pr-5">
+            last_login
+          </th>
+          <td mat-cell *matCellDef="let element">
+            <!-- {{moment(element.last_login).format('MMMM Do YYYY, h:mm:ss a')}} -->
+            {{moment(element.last_login).fromNow()}}
+
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef class="pr-5">
+            status
+          </th>
+          <td mat-cell *matCellDef="let element">
+
+            <div class="d-flex align-items-center" *ngIf="element.status==='2' || element.status==='3'">
+              <span class="bullelements status text-success font-weight-bold mr-2">&bull;  </span>
+              <span>On Action</span>
+            </div>
+            <div class="d-flex align-items-center"  *ngIf="element.status==='0'">
+              <span class="bullelements status text-primary font-weight-bold">&bull;</span>
+              <span> FB Connect </span>
+
+            </div>
+
+
+            <div class="d-flex align-items-center"  *ngIf="element.status==='1'">
+              <span class="bullelements status text-warning font-weight-bold">&bull;  </span>
+              <span>Signup</span>
+            </div>
+
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </mat-table>
+      <mat-card *ngIf="isLoading"
+      style="display: flex; justify-content: center; align-items: center">
+     <mat-progress-spinner
+       color="primary"
+       mode="indeterminate">
+     </mat-progress-spinner>
+   </mat-card>
+   <mat-paginator [length]="length" [pageSize]="pageSize" [pageIndex]="pageIndex" [pageSizeOptions]="pageSizeOptions"
+   (page)="onPaginateChange($event)">
+ </mat-paginator>
+    </div>
+  </div>
+
+
+  </div>
+</div>

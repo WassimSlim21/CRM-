@@ -1,0 +1,203 @@
+<div class="main-content">
+  <div class="container">
+      <div class="row-md-18">
+          <div class="col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-primary">
+                      <h4 class="card-title"><i *ngIf="socialAccount?.provider === 'instagram'" class="fa fa-instagram"></i> <i *ngIf="socialAccount?.provider === 'facebook'" class="fa fa-facebook"></i>  {{socialAccount?.title}}</h4>
+                  </div>
+                  <div class="card-body">
+
+                      <div class="row">
+                        <!-- USER IMAGE 'only if it's facebook ' -->
+                        <div class="col-md-6">
+                          <a href="{{socialAccount?.url}}" target="_blank" >   <img src="https://graph.facebook.com/{{socialAccount?.remote_id}}/picture?type=square"   class="rounded-circle align-center margin-auto" height="80" width="80"></a>
+                         </div>
+                            <!-- USER INFORMATIONS -->
+                        <div class="col-md-6">
+
+                          <mat-list>
+
+                            <mat-list-item>
+
+
+                              Type :  {{socialAccount?.provider}}
+
+                            </mat-list-item>
+                            <mat-divider></mat-divider>
+                            <mat-list-item *ngIf='socialAccount?.nickname'> Nickname : {{socialAccount?.nickname | slice:0:50}}</mat-list-item>
+                            <mat-divider  *ngIf='socialAccount?.nickname'></mat-divider>
+                            <mat-list-item  *ngIf='socialAccount?.description'> Description : {{socialAccount?.description | slice:0:50}} ... </mat-list-item>
+                            <mat-divider   *ngIf='socialAccount?.description'></mat-divider>
+                            <mat-list-item  *ngIf='socialAccount?.created_at'> Created At : </mat-list-item>
+                            <mat-divider *ngIf='socialAccount?.created_at'></mat-divider>
+                            <mat-list-item *ngIf='socialAccount?.flagged_at'> Flagged At </mat-list-item>
+                            <mat-divider *ngIf='socialAccount?.flagged_at'></mat-divider>
+                            <mat-list-item *ngIf='socialAccount?.flagged_cause'>Flagged Cause :</mat-list-item>
+                          </mat-list>
+                        </div>
+                    </div>
+
+                    <div class="row pt-2">
+                      <div class="col-md-12">
+                        <mat-accordion>
+                          <!-- Users -->
+
+                          <mat-expansion-panel >
+                            <mat-expansion-panel-header>
+                              <mat-panel-title>
+                                Users
+                              </mat-panel-title>
+
+                            </mat-expansion-panel-header>
+
+                                <mat-list *ngFor="let user of users">
+
+                                   <mat-list-item >
+
+                                    <div mat-line><a (click)="openDialog(user?._id)"><img src="https://graph.facebook.com/{{user?.provider_userId}}/picture"   class="rounded-circle"></a></div>
+                                    <div mat-line>  {{user?.data?.job}} </div>
+                                    <div mat-column> <a (click)="openDialog(user?._id)"><p class="text-bold text-primary">{{user?.name}}</p></a></div>
+
+                                  </mat-list-item>
+                                  <mat-divider></mat-divider>
+                                </mat-list>
+
+                          </mat-expansion-panel>
+
+                          <!-- Tags -->
+                          <mat-expansion-panel >
+                            <mat-expansion-panel-header>
+                              <mat-panel-title>
+                                Tags
+                              </mat-panel-title>
+
+                            </mat-expansion-panel-header>
+                                <mat-list *ngFor="let tag of tags">
+                                   <mat-list-item >
+                                    <div mat-line> <a (click)="openDialogTagDetails(tag)"> {{tag.name}}</a> </div>
+                                    <div mat-line>{{moment(tag.updated_at).fromNow()}}</div>
+                                    <div mat-column>
+                                      <div class="row">
+                                        <div class="col- pl-1 text-secondary" *ngIf="tag.type === '0'">Sector</div>
+                                        <div class="col- pl-1 text-secondary"  *ngIf="tag.type === '1'">Country</div>
+                                        <div class="col- pl-1 text-secondary" *ngIf="tag.type === '2'">Provider</div>
+                                       </div>
+                                    </div>
+
+                                  </mat-list-item>
+                                  <mat-divider></mat-divider>
+                                </mat-list>
+                          </mat-expansion-panel>
+
+
+                             <!-- Benchmarks -->
+                             <mat-expansion-panel *ngIf="benchmarks">
+                              <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                  Benchmarks
+                                </mat-panel-title>
+                              </mat-expansion-panel-header>
+
+                                  <mat-list *ngFor="let benchmark of benchmarks">
+                                     <mat-list-item >
+                                      <div mat-line> {{benchmark?.name}}</div>
+                                      <div mat-line> {{benchmark?.type}}</div>
+                                      <div mat-line>{{moment(benchmark?.updated_at).fromNow()}}</div>
+                                      <div mat-column>
+                                    {{benchmark?.provider}}
+                                      </div>
+                                      <div mat-column>
+                                      {{benchmark?.social_accounts.length}}
+                                    </div>
+
+
+                                    </mat-list-item>
+                                    <mat-divider></mat-divider>
+                                  </mat-list>
+                            </mat-expansion-panel>
+                        </mat-accordion>
+
+
+                      </div>
+
+                    </div>
+                    <!-- stat details -->
+                    <div class="row">
+                      <div class="col-lg-6 col-md-12 col-sm-6">
+                          <div class="card card-stats">
+                              <div class="card-header card-header-warning card-header-icon">
+                                  <div class="card-icon">
+                                      <i class="material-icons">face</i>
+                                  </div>
+                                  <p class="card-category">Users</p>
+                                  <h3 class="card-title">{{users?.length}}
+                                  </h3>
+                              </div>
+                              <div class="card-footer">
+                                  <div class="stats">
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-lg-6 col-md126 col-sm-6">
+                          <div class="card card-stats">
+                              <div class="card-header card-header-info card-header-icon">
+                                  <div class="card-icon">
+                                      <i class="material-icons">dashboard</i>
+                                  </div>
+                                  <p class="card-category">Benchmarks</p>
+                                  <h3 class="card-title">
+                                      {{benchmarks?.length}}
+                                  </h3>
+                              </div>
+                              <div class="card-footer">
+                                  <div class="stats">
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+
+
+                      <div class="col-md-12" [formGroup]="filterForm">
+                        <mat-form-field class="example-chip-list">
+                          <mat-chip-list #chipList aria-label="tag selection">
+                            <mat-chip
+                              *ngFor="let tag of tags"
+                              [selectable]="selectable"
+                              [removable]="removable"
+                              (removed)="remove(tag)">
+                              {{tag.name || tag}}
+                              <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                            </mat-chip>
+                            <input
+                              placeholder="add tag..."
+                              #tagInput
+                              formControlName="tagCtrl"
+                              [matAutocomplete]="auto"
+                              [matChipInputFor]="chipList"
+                              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                              (matChipInputTokenEnd)="add($event)">
+                          </mat-chip-list>
+                          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                            <mat-option *ngFor="let tg of filteredTags | async" [value]="tg">
+                              {{tg}}
+                            </mat-option>
+                          </mat-autocomplete>
+                        </mat-form-field>
+                        <button mat-raised-button color="warn"  class="m-4 h-auto" (click)="updateSocialAccount()">Save</button>
+
+                      </div>
+
+                  </div>
+                  </div>
+
+              </div>
+
+          </div>
+      </div>
+  </div>
+</div>
+
+

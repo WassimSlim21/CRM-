@@ -1,0 +1,11 @@
+
+<div class="wrapper">
+  <div class="sidebar" data-color="azure" data-background-color="white" data-image="./assets/img/sidebar-1.jpg">
+      <app-sidebar></app-sidebar>
+  </div>
+  <div class="main-panel">
+  <app-header>
+  </app-header>
+        <router-outlet (activate)="onActivate($event)"></router-outlet>
+  </div>
+</div>

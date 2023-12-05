@@ -1,0 +1,153 @@
+<div class="main-content d-flex ">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-">
+        <div class="card">
+          <div class="card-header card-header-primary">
+            <h4 class="card-title">Create new Pack</h4>
+            <p class="card-category">Complete pack informations</p>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="addPackForm">
+              <div class="row">
+
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Pack name" formControlName="pack_name">
+                    <div *ngIf="addPackForm.value.pack_name.length < 4" class="text-danger">
+                      Name must be at least 4 characters long.
+                 </div>
+                  </mat-form-field>
+                </div>
+
+
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="annual Subscription" type="number" formControlName="annualSubscription">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="mouthlySubcription" type="number" formControlName="mouthlySubcription">
+                  </mat-form-field>
+                </div>
+
+
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="dataHistory Years" type="number" formControlName="dataHistoryYears">
+                  </mat-form-field>
+                </div>
+
+
+
+              </div>
+
+
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Social Accounts" type="number" formControlName="socialAccounts">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-6">
+
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Benchmarks" type="number" formControlName="benchmarks">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="users" type="number" formControlName="users">
+                  </mat-form-field>
+                </div>
+
+
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="add pages" type="number" formControlName="addPage">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="add users" type="number" formControlName="addUser">
+                  </mat-form-field>
+                </div>
+
+                <div class="col-md-6">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="add benchmarks " type="number" formControlName="addBenchmark">
+                  </mat-form-field>
+                </div>
+
+              </div>
+
+
+
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-checkbox formControlName="dashboard">dashboard</mat-checkbox>
+                </div>
+                <div class="col-md-6">
+                  <mat-checkbox formControlName="audienceInsights">Audience Insights</mat-checkbox>
+                </div>
+                <div class="col-md-6">
+                  <mat-checkbox formControlName="trendengagementreports">Trend Engagement Reports</mat-checkbox>
+                </div>
+                <div class="col-md-6">
+                  <mat-checkbox formControlName="customBenchmark">Custom Benchmark</mat-checkbox>
+                </div>
+              </div>
+
+
+
+              <div class="row">
+                <div class="col-md-6">
+                  <mat-checkbox formControlName="nationalReports">national Reports</mat-checkbox>
+                </div>
+
+
+                <div class="col-md-6">
+                  <mat-checkbox formControlName="competitorContentCuration">competitor Content Curation</mat-checkbox>
+                </div>
+
+
+                <div class="col-md-6">
+                  <mat-checkbox formControlName="emailReports">email Reports</mat-checkbox>
+                </div>
+
+                <div class="col-md-6">
+                  <mat-checkbox formControlName="brandingDesign">branding Design</mat-checkbox>
+                </div>
+              </div>
+
+
+
+
+
+
+
+
+
+              <div class="row">
+                <div class="col-md-6">
+                  <button mat-raised-button type="submit" class="btn btn-primary pull-left"
+                    (click)="addPack()">Create</button>
+                </div>
+                <div class="col-md-6" pull-right>
+                  <a mat-raised-button class="btn" (click)="onReset()">Cancel</a>
+                </div>
+                <div class="clearfix"></div>
+
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

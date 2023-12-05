@@ -1,0 +1,31 @@
+  <div class="card">
+    <div class="card-header card-header-primary">
+      <h4 class="card-title">Update user {{data.account.role}} role</h4>
+    </div>
+    <!-- Card body -->
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+          <mat-form-field>
+            <mat-label>{{data.account.role}}</mat-label>
+            <mat-select [(value)]="selected">
+              <mat-option *ngFor="let role of roles" [value]="role.name">
+                {{role.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <button mat-raised-button type="submit" class="btn btn-primary pull-left"
+            (click)="updateRole()">Update</button>
+        </div>
+        <div class="col-md-6" pull-right>
+          <a mat-raised-button (click)="close()" class="btn">Cancel</a>
+        </div>
+        <div class="clearfix"></div>
+
+      </div>
+    </div>
+  </div>

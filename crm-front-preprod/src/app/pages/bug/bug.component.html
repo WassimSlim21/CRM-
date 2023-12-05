@@ -1,0 +1,309 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="card pl-5">
+      <div class="card-header card-header-primary">
+        <h4 class="card-title">Bugs WorkFlow</h4>
+      </div>
+      <div class="card-body ">
+
+        <button mat-raised-button (click)="showArchived = true" *ngIf="!showArchived"> Sow archived bugs</button>
+        <button mat-raised-button (click)="showArchived = false" *ngIf="showArchived"> Sow actual bugs</button>
+        <div class="row " cdkDropListGroup >
+          <div class="col-" *ngIf="!showArchived">
+            <div class="card">
+              <div class="drag-container min-vh-75">
+                <div class="card-header card-header-danger">
+                  <h4 class="card-title"> New Bug</h4>
+                </div>
+                <div class="card-body">
+                  <div cdkDropList id="newBug" [cdkDropListData]="newBug" class="item-list"
+                    (cdkDropListDropped)="drop($event)">
+                    <mat-list class="item-box" *ngFor="let bug of newBug" cdkDrag>
+                      <mat-list-item matTooltip="Assigned to : {{bug?.account_assigned_id?.userName}}"  [matTooltipDisabled]="(bug.account_assigned_id == null)"  [matTooltipDisabled]="(bug.account_assigned_id == null)"
+                      >
+                        <img mat-list-avatar src="../../../assets/img/person.png" />
+                        <h3 mat-line class="font-weight-bold text-danger"> {{bug?.name}} </h3>
+                        <h4 mat-line *ngIf="bug.account_assigned_id">assigned to :</h4>
+                        <h3 mat-line class="font-weight-bold text-secondary">
+                          <i class="material-icons"></i>
+                          {{bug?.account_assigned_id?.userName}} </h3>
+                        <h6 mat-column class="text-warning">
+                          {{moment(bug?.updated_at).fromNow()}}
+                        </h6>
+                        <div mat-column>
+                          <button mat-icon-button [matMenuTriggerFor]="menu"
+                            aria-label="Example icon-button with a menu">
+                            <mat-icon>more_vert</mat-icon>
+                          </button>
+                          <mat-menu #menu="matMenu">
+                            <button mat-menu-item (click)="openDialogListUser(bug)">
+                              <mat-icon>person_add</mat-icon>
+                              <span>Assigned to</span>
+                            </button>
+                            <button mat-menu-item (click)="comfirmDialog(bug)">
+                              <mat-icon>delete</mat-icon>
+                              <span>delete</span>
+                            </button>
+                          </mat-menu>
+                        </div>
+                        <div mat-line>
+                          <button class="btn btn-danger btn-sm" (click)="OpenBugDetailsDialog(bug._id)">Details</button>
+                        </div>
+
+                      </mat-list-item>
+                    </mat-list>
+                  </div>
+                  <div class="fab-container float-none">
+                    <button mat-mini-fab class="fab-toggler" class="btn btn-info" (click)="addBugDialog()">
+                      <i class="material-icons">add</i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-" *ngIf="!showArchived">
+            <div class="card">
+              <div class="drag-container min-vh-75">
+                <div class="card-header card-header-warning">
+                  <h4 class="card-title"> In Progress
+                  </h4>
+                </div>
+                <div class="card-body">
+                  <div cdkDropList id="inProgress" [cdkDropListData]="inProgress" class="item-list"
+                    (cdkDropListDropped)="drop($event)">
+                    <mat-list class="item-box" *ngFor="let bug of inProgress" cdkDrag>
+                      <mat-list-item matTooltip="Assigned to : {{bug?.account_assigned_id?.userName}}"  [matTooltipDisabled]="(bug.account_assigned_id == null)">
+                        <img mat-list-avatar src="../../../assets/img/person.png" />
+                        <h3 mat-line class="font-weight-bold text-danger"> {{bug?.name}} </h3>
+                        <h4 mat-line>assigned to :</h4>
+                        <h3 mat-line class="font-weight-bold text-secondary"> {{bug?.account_assigned_id?.userName || 'not Assigned'}}</h3>
+                        <h6 mat-column class="text-warning">{{moment(bug?.updated_at).fromNow()}}</h6>
+                        <div mat-column>
+                          <button mat-icon-button [matMenuTriggerFor]="menu"
+                            aria-label="Example icon-button with a menu">
+                            <mat-icon>more_vert</mat-icon>
+                          </button>
+                          <mat-menu #menu="matMenu">
+                            <button mat-menu-item (click)="openDialogListUser(bug)">
+                              <mat-icon>person_add</mat-icon>
+                              <span>Assigned to</span>
+                            </button>
+                            <button mat-menu-item (click)="comfirmDialog(bug)">
+                              <mat-icon>delete</mat-icon>
+                              <span>delete</span>
+                            </button>
+                          </mat-menu>
+                        </div>
+                        <div mat-line>
+                          <button class="btn btn-warning btn-sm" (click)="OpenBugDetailsDialog(bug._id)">Details</button>
+                        </div>
+                      </mat-list-item>
+                    </mat-list>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-" *ngIf="!showArchived">
+            <div class="card">
+              <div class="drag-container min-vh-75">
+                <div class="card-header card-header-primary">
+                  <h4 class="card-title"> Ready For Test
+                  </h4>
+                </div>
+                <div class="card-body">
+                  <div cdkDropList id="readyForTest" [cdkDropListData]="readyForTest" class="item-list"
+                    (cdkDropListDropped)="drop($event)">
+                    <mat-list class="item-box" *ngFor="let bug of readyForTest" cdkDrag>
+                      <mat-list-item matTooltip="Assigned to : {{bug?.account_assigned_id?.userName}}"  [matTooltipDisabled]="(bug.account_assigned_id == null)">
+                        <img mat-list-avatar src="../../../assets/img/person.png" />
+                        <h3 mat-line class="font-weight-bold text-danger"> {{bug?.name}} </h3>
+                        <h4 mat-line>assigned to :</h4>
+                        <h3 mat-line class="font-weight-bold text-secondary">  {{bug?.account_assigned_id?.userName || 'not Assigned'}}</h3>
+
+                        <h6 mat-column class="text-warning">{{moment(bug?.updated_at).fromNow()}}</h6>
+                        <div mat-column>
+                          <button mat-icon-button [matMenuTriggerFor]="menu"
+                            aria-label="Example icon-button with a menu">
+                            <mat-icon>more_vert</mat-icon>
+                          </button>
+                          <mat-menu #menu="matMenu">
+                            <button mat-menu-item (click)="openDialogListUser(bug)">
+                              <mat-icon>person_add</mat-icon>
+                              <span>Assigned to</span>
+                            </button>
+                            <button mat-menu-item (click)="comfirmDialog(bug)">
+                              <mat-icon>delete</mat-icon>
+                              <span>delete</span>
+                            </button>
+
+                          </mat-menu>
+                        </div>
+                        <div mat-line>
+                          <button class="btn btn-primary btn-sm" (click)="OpenBugDetailsDialog(bug._id)">Details</button>
+                        </div>
+
+                      </mat-list-item>
+                    </mat-list>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-" *ngIf="!showArchived">
+            <div class="card">
+              <div class="drag-container min-vh-75">
+                <div class="card-header card-header-success">
+                  <h4 class="card-title"> Done
+                  </h4>
+                </div>
+                <div class="card-body">
+                  <div cdkDropList id="done" [cdkDropListData]="done" class="item-list"
+                    (cdkDropListDropped)="drop($event)">
+                    <mat-list class="item-box" *ngFor="let bug of done" cdkDrag>
+                      <mat-list-item matTooltip="Assigned to : {{bug?.account_assigned_id?.userName}}"  [matTooltipDisabled]="(bug.account_assigned_id == null)">
+                        <img mat-list-avatar src="../../../assets/img/person.png" />
+                        <h3 mat-line class="font-weight-bold text-danger"> {{bug?.name}} </h3>
+                        <h4 mat-line>assigned to :</h4>
+
+                        <h3 mat-line class="font-weight-bold text-secondary"> {{bug?.account_assigned_id?.userName || 'not Assigned'}} </h3>
+
+
+                        <h6 mat-column class="text-warning">{{moment(bug?.updated_at).fromNow()}}</h6>
+                        <div mat-column>
+                          <button mat-icon-button [matMenuTriggerFor]="menu"
+                            aria-label="Example icon-button with a menu">
+                            <mat-icon>more_vert</mat-icon>
+                          </button>
+                          <mat-menu #menu="matMenu">
+                            <button mat-menu-item (click)="openDialogListUser(bug)">
+                              <mat-icon>person_add</mat-icon>
+                              <span>Assigned to</span>
+                            </button>
+                            <button mat-menu-item (click)="archive(bug,true)">
+                              <mat-icon>archive</mat-icon>
+                              <span>archive</span>
+                            </button>
+                            <button mat-menu-item (click)="comfirmDialog(bug)">
+                              <mat-icon>delete</mat-icon>
+                              <span>delete</span>
+                            </button>
+                          </mat-menu>
+                        </div>
+                        <div mat-line>
+                          <button class="btn btn-success btn-sm" (click)="OpenBugDetailsDialog(bug._id)">Details</button>
+                        </div>
+                      </mat-list-item>
+                    </mat-list>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-" *ngIf="!showArchived">
+            <div class="card">
+              <div class="drag-container min-vh-75">
+                <div class="card-header card-header-info">
+                  <h4 class="card-title"> Need Info
+                  </h4>
+                </div>
+                <div class="card-body">
+                  <div cdkDropList id="needInfo" [cdkDropListData]="needInfo" class="item-list"
+                    (cdkDropListDropped)="drop($event)">
+                    <mat-list class="item-box" *ngFor="let bug of needInfo" cdkDrag>
+                      <mat-list-item matTooltip="Assigned to : {{bug?.account_assigned_id?.userName}}"  [matTooltipDisabled]="(bug.account_assigned_id == null)">
+                        <img mat-list-avatar src="../../../assets/img/person.png" />
+                        <h3 mat-line class="font-weight-bold text-danger"> {{bug?.name}} </h3>
+                        <h4 mat-line>assigned to :</h4>
+
+                        <h3 mat-line class="font-weight-bold text-secondary"> {{bug?.account_assigned_id?.userName || 'not Assigned'}} </h3>
+
+                        <h6 mat-column class="text-warning">{{moment(bug?.updated_at).fromNow()}}</h6>
+                        <div mat-column>
+                          <button mat-icon-button [matMenuTriggerFor]="menu"
+                            aria-label="Example icon-button with a menu">
+                            <mat-icon>more_vert</mat-icon>
+                          </button>
+                          <mat-menu #menu="matMenu">
+                            <button mat-menu-item (click)="openDialogListUser(bug)">
+                              <mat-icon>person_add</mat-icon>
+                              <span>Assigned to</span>
+                            </button>
+                            <button mat-menu-item (click)="comfirmDialog(bug)">
+                              <mat-icon>delete</mat-icon>
+                              <span>delete</span>
+                            </button>
+                          </mat-menu>
+                        </div>
+                        <div mat-line>
+                          <button class="btn btn-info btn-sm" (click)="OpenBugDetailsDialog(bug._id)">Details</button>
+                        </div>
+                      </mat-list-item>
+                    </mat-list>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Archived bugs  -->
+          <div class="col-" *ngIf="showArchived">
+            <div class="card">
+              <div class="drag-container min-vh-75">
+                <div class="card-header card-header-info">
+                  <h4 class="card-title"> Archived
+                  </h4>
+                </div>
+                <div class="card-body">
+                  <div cdkDropList id="archived" class="item-list"
+              >
+                    <mat-list class="item-box" *ngFor="let bug of archived" >
+                      <mat-list-item matTooltip="Assigned to : {{bug?.account_assigned_id?.userName}}"  [matTooltipDisabled]="(bug.account_assigned_id == null)">
+                        <img mat-list-avatar src="../../../assets/img/person.png" />
+                        <h3 mat-line class="font-weight-bold text-danger"> {{bug?.name}} </h3>
+                        <h4 mat-line>assigned to :</h4>
+                        <h3 mat-line class="font-weight-bold text-secondary">  {{bug?.account_assigned_id?.userName || 'not Assigned'}} </h3>
+
+                        <h6 mat-column class="text-warning">{{moment(bug?.updated_at).fromNow()}}</h6>
+                        <div mat-column>
+                          <button mat-icon-button [matMenuTriggerFor]="menu"
+                            aria-label="Example icon-button with a menu">
+                            <mat-icon>more_vert</mat-icon>
+                          </button>
+                          <mat-menu #menu="matMenu">
+
+                            <button mat-menu-item (click)="comfirmDialog(bug)">
+                              <mat-icon>delete</mat-icon>
+                              <span>delete</span>
+                            </button>
+                            <button mat-menu-item (click)="archive(bug,false)">
+                              <mat-icon>archive</mat-icon>
+                              <span>unarchive</span>
+                            </button>
+                          </mat-menu>
+                        </div>
+                        <div mat-line>
+                          <button class="btn btn-info btn-sm" (click)="OpenBugDetailsDialog(bug._id)">Details</button>
+                        </div>
+                      </mat-list-item>
+                    </mat-list>
+                  </div>
+                </div>
+
+
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
